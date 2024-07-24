@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget and Expense Tracker</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="./assets/js/chart.js"></script>
+</head>
+
+<body>
+    <nav>
+        <button onclick="showSection('budget-planner')">Budget Planner</button>
+        <button onclick="showSection('expense-tracker')">Add Expense</button>
+        <button onclick="showSection('expense-history')">Expense History</button>
+        <button onclick="showSection('planning-history')">Planning History</button>
+        <button onclick="showSection('budget-dashboard')">Dashboard</button>
+        <button onclick="showSection('login')">Login</button>
+    </nav>
+
+    <section id="login" class="container hidden">
+        <h2>Login</h2>
+        <form onsubmit="event.preventDefault(); signInOrSignUp(username.value, password.value);">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Login / Sign Up</button>
+        </form>
+    </section>
+
+    <section id="budget-planner" class="container hidden">
+        <h2>Budget Planner</h2>
+        <form onsubmit="event.preventDefault(); calculateAndSaveBudget();">
+            <input type="number" id="budget" placeholder="Enter your budget" required>
+            <input type="number" id="income" placeholder="Enter your income" required>
+            <input type="number" id="expenses" placeholder="Enter your expenses" required>
+            <button type="submit">Calculate Budget</button>
+        </form>
+        <div id="result"></div>
+    </section>
+
+    <section id="expense-tracker" class="container hidden">
+        <h2>Expense Tracker</h2>
+        <form onsubmit="event.preventDefault(); addExpense();">
+            <input type="number" id="amount" placeholder="Enter the amount" required>
+            <input type="text" id="category" placeholder="Enter the category" required>
+            <input type="date" id="date" required>
+            <input type="time" id="time" required>
+            <button type="submit">Add Expense</button>
+        </form>
+    </section>
+
+    <section id="expense-history" class="container hidden">
+        <h2>Expense History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody id="expenseTableBody"></tbody>
+        </table>
+        <button onclick="goBack()">Back</button>
+    </section>
+
+
+    <section id="planning-history" class="container hidden">
+        <h2>planning History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>budget</th>
+                    <th>income</th>
+                    <th>expenses</th>
+                    <th>needs</th>
+                    <th>wants</th>
+                    <th>invest</th>
+                </tr>
+            </thead>
+            <tbody id="planningTableBody"></tbody>
+        </table>
+    </section>
+
+    <section id="budget-dashboard" class="container hidden">
+        <h2>Budget Dashboard</h2>
+        <canvas id="budgetChart"></canvas>
+    </section>
+    <script type="module" src="./assets/js/index.js"></script>
+</body>
+
+</html>
